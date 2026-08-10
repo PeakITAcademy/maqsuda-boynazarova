@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test — Sport olami — Boynazarova Maqsuda</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#141416;
+    --paper:#f7f5f2;
+    --card:#ffffff;
+    --red:#c81d25;
+    --red-deep:#8f1116;
+    --red-bright:#ff3b30;
+    --steel:#5c5f66;
+    --line:#e3ddd6;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+
+  h1,h2,h3,.eyebrow,.navbrand,.stagenum{
+    font-family:'Oswald',sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.02em;
+  }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky;top:0;z-index:50;
+    background:var(--ink);
+    display:flex;align-items:center;justify-content:space-between;
+    padding:0 32px;
+    height:64px;
+    border-bottom:3px solid var(--red);
+  }
+  .navbrand{
+    color:#fff;font-size:1.05rem;font-weight:600;letter-spacing:0.05em;
+    display:flex;align-items:center;gap:10px;
+  }
+  .navbrand .dot{
+    width:10px;height:10px;background:var(--red-bright);
+    transform:skewX(-15deg);
+    display:inline-block;
+  }
+  .navlinks{display:flex;gap:4px;}
+  .navlinks a{
+    color:#c9c9cc;text-decoration:none;
+    font-family:'Oswald',sans-serif;
+    font-size:0.82rem;letter-spacing:0.08em;text-transform:uppercase;
+    padding:10px 16px;
+    transition:color .2s ease;
+    border-bottom:2px solid transparent;
+  }
+  .navlinks a:hover, .navlinks a.active{
+    color:#fff;
+    border-bottom:2px solid var(--red-bright);
+  }
+  @media(max-width:720px){
+    .navlinks{display:none;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    background:var(--ink);
+    color:#fff;
+    padding:110px 8vw 90px;
+    overflow:hidden;
+  }
+  .speedlines{
+    position:absolute;inset:0;
+    z-index:0;
+    pointer-events:none;
+  }
+  .speedlines span{
+    position:absolute;
+    height:3px;
+    background:var(--red);
+    opacity:0.85;
+    transform:skewX(-25deg);
+    animation:dash 2.6s ease-in-out infinite;
+  }
+  .speedlines span:nth-child(1){top:18%;left:-10%;width:38%;animation-delay:0s;}
+  .speedlines span:nth-child(2){top:34%;left:-20%;width:55%;background:var(--red-bright);opacity:0.6;animation-delay:.3s;}
+  .speedlines span:nth-child(3){top:52%;left:-15%;width:30%;animation-delay:.6s;}
+  .speedlines span:nth-child(4){top:68%;left:-25%;width:48%;background:var(--red-deep);animation-delay:.15s;}
+  .speedlines span:nth-child(5){top:85%;left:-10%;width:25%;animation-delay:.45s;}
+  @keyframes dash{
+    0%{transform:skewX(-25deg) translateX(0);}
+    50%{transform:skewX(-25deg) translateX(60px);}
+    100%{transform:skewX(-25deg) translateX(0);}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .speedlines span{animation:none;}
+  }
+
+  .hero-inner{position:relative;z-index:1;max-width:900px;}
+  .eyebrow{
+    color:var(--red-bright);
+    font-size:0.85rem;
+    letter-spacing:0.18em;
+    margin-bottom:18px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .eyebrow::before{
+    content:"";width:34px;height:2px;background:var(--red-bright);display:inline-block;
+  }
+  .hero h1{
+    font-size:clamp(2.6rem,6vw,4.6rem);
+    font-weight:700;
+    line-height:1.05;
+    margin-bottom:24px;
+  }
+  .hero h1 em{
+    font-style:normal;
+    color:var(--red-bright);
+  }
+  .hero p{
+    font-size:1.08rem;
+    color:#c9c9cc;
+    max-width:640px;
+    font-weight:400;
+  }
+  .author-tag{
+    margin-top:40px;
+    display:inline-flex;align-items:center;gap:14px;
+    border:1px solid #333;
+    padding:10px 18px 10px 10px;
+    background:rgba(255,255,255,0.03);
+  }
+  .author-tag .bib{
+    background:var(--red);
+    color:#fff;
+    font-family:'Oswald',sans-serif;
+    font-weight:700;
+    font-size:1.2rem;
+    padding:6px 12px;
+    transform:skewX(-8deg);
+  }
+  .author-tag span.name{
+    font-family:'Inter',sans-serif;
+    font-size:0.92rem;
+    color:#e8e8ea;
+  }
+  .author-tag span.role{
+    display:block;
+    font-size:0.75rem;
+    color:var(--steel);
+  }
+
+  /* ---------- SECTION SHELL ---------- */
+  section.block{
+    padding:80px 8vw;
+    max-width:1180px;
+    margin:0 auto;
+  }
+  section.block.tint{background:transparent;}
+  .block-head{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:24px;
+    margin-bottom:44px;
+    border-bottom:2px solid var(--line);
+    padding-bottom:20px;
+  }
+  .block-head h2{
+    font-size:clamp(1.7rem,3.4vw,2.5rem);
+    font-weight:600;
+    max-width:680px;
+    line-height:1.15;
+  }
+  .block-head h2 .accent{color:var(--red);}
+  .block-tag{
+    font-family:'Oswald',sans-serif;
+    font-size:0.78rem;
+    letter-spacing:0.12em;
+    color:var(--steel);
+    text-transform:uppercase;
+    white-space:nowrap;
+  }
+  .lede{
+    color:var(--steel);
+    max-width:760px;
+    margin-bottom:40px;
+    font-size:1rem;
+  }
+
+  /* ---------- TIMELINE (stages) ---------- */
+  .stages{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:0;
+    border-top:2px solid var(--ink);
+  }
+  .stage{
+    padding:26px 20px 26px 0;
+    border-right:1px solid var(--line);
+    position:relative;
+  }
+  .stage:last-child{border-right:none;}
+  .stagenum{
+    color:var(--red);
+    font-size:2.1rem;
+    font-weight:700;
+    line-height:1;
+    margin-bottom:10px;
+  }
+  .stage h3{
+    font-size:0.95rem;
+    font-weight:600;
+    margin-bottom:10px;
+    text-transform:none;
+    letter-spacing:0;
+    font-family:'Inter',sans-serif;
+  }
+  .stage p{
+    font-size:0.88rem;
+    color:var(--steel);
+  }
+
+  /* ---------- SPORT GRID CARDS ---------- */
+  .card-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:22px;
+  }
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    padding:26px 24px;
+    position:relative;
+    overflow:hidden;
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .card::before{
+    content:"";
+    position:absolute;
+    left:0;top:0;bottom:0;
+    width:4px;
+    background:var(--red);
+    transform:scaleY(0);
+    transform-origin:top;
+    transition:transform .25s ease;
+  }
+  .card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 14px 30px rgba(0,0,0,0.08);
+  }
+  .card:hover::before{transform:scaleY(1);}
+  .card h3{
+    font-size:1rem;
+    font-weight:600;
+    text-transform:none;
+    letter-spacing:0;
+    font-family:'Inter',sans-serif;
+    margin-bottom:10px;
+  }
+  .card p{
+    font-size:0.9rem;
+    color:var(--steel);
+  }
+  .card .tag{
+    display:inline-block;
+    font-family:'Oswald',sans-serif;
+    font-size:0.68rem;
+    letter-spacing:0.1em;
+    color:var(--red);
+    margin-bottom:12px;
+  }
+
+  /* ---------- VIDEO ---------- */
+  .video-wrap{
+    position:relative;
+    width:100%;
+    max-width:900px;
+    aspect-ratio:16/9;
+    background:var(--ink);
+    border:1px solid var(--line);
+    border-left:4px solid var(--red);
+    overflow:hidden;
+  }
+  .video-wrap iframe{
+    position:absolute;inset:0;
+    width:100%;height:100%;
+    border:0;
+  }
+
+  /* ---------- PROS / CONS ---------- */
+  .split{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:2px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  @media(max-width:720px){.split{grid-template-columns:1fr;}}
+  .split-col{background:var(--card);padding:32px 28px;}
+  .split-col h3{
+    font-size:1.05rem;
+    margin-bottom:20px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .split-col.pos h3{color:var(--red-deep);}
+  .split-col.pos h3::before{content:"+";color:var(--red);font-size:1.3rem;}
+  .split-col.neg h3::before{content:"–";color:var(--steel);font-size:1.3rem;}
+  .split-col ul{list-style:none;}
+  .split-col li{
+    padding:12px 0;
+    border-bottom:1px solid var(--line);
+    font-size:0.92rem;
+    color:var(--ink);
+  }
+  .split-col li:last-child{border-bottom:none;}
+  .split-col li b{display:block;font-weight:600;margin-bottom:2px;}
+  .split-col li span{color:var(--steel);font-size:0.86rem;}
+
+  /* ---------- FUTURE STRIP ---------- */
+  .future{
+    background:var(--ink);
+    color:#fff;
+    padding:70px 8vw;
+    position:relative;
+    overflow:hidden;
+  }
+  .future .speedlines span{opacity:0.5;}
+  .future-inner{position:relative;z-index:1;}
+  .future h2{color:#fff;font-size:clamp(1.6rem,3vw,2.2rem);margin-bottom:36px;font-weight:600;}
+  .future-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:28px;
+  }
+  .future-item{
+    border-left:3px solid var(--red);
+    padding-left:18px;
+  }
+  .future-item h4{
+    font-family:'Oswald',sans-serif;
+    font-size:0.95rem;
+    letter-spacing:0.04em;
+    margin-bottom:8px;
+    color:#fff;
+    text-transform:uppercase;
+  }
+  .future-item p{color:#a8a8ac;font-size:0.88rem;}
+
+  /* ---------- SUMMARY ---------- */
+  .summary{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-left:4px solid var(--red);
+    padding:28px 30px;
+    font-size:0.96rem;
+    color:var(--ink);
+    margin-top:36px;
+  }
+  .summary b{color:var(--red-deep);}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:var(--ink);
+    color:#8b8b90;
+    text-align:center;
+    padding:34px 20px;
+    font-size:0.8rem;
+    border-top:3px solid var(--red);
+  }
+  footer .navbrand{justify-content:center;margin-bottom:10px;color:#fff;}
+
+  /* ---------- QUIZ ---------- */
+  .quiz-intro{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-left:4px solid var(--red);
+    padding:30px 28px;
+    max-width:520px;
+    margin-bottom:10px;
+  }
+  .quiz-intro label{
+    display:block;
+    font-family:'Oswald',sans-serif;
+    font-size:0.78rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--steel);
+    margin-bottom:10px;
+  }
+  .quiz-intro input[type="text"]{
+    width:100%;
+    border:1px solid var(--line);
+    background:var(--paper);
+    padding:12px 14px;
+    font-family:'Inter',sans-serif;
+    font-size:0.95rem;
+    color:var(--ink);
+    margin-bottom:8px;
+  }
+  .quiz-intro input[type="text"]:focus{outline:2px solid var(--red);outline-offset:1px;}
+  .quiz-intro .hint{font-size:0.78rem;color:var(--steel);}
+
+  .progress-track{
+    height:4px;background:var(--line);width:100%;margin:34px 0 6px;position:relative;
+  }
+  .progress-fill{
+    height:100%;background:var(--red);width:0%;
+    transition:width .3s ease;
+  }
+  .progress-label{
+    font-family:'Oswald',sans-serif;
+    font-size:0.75rem;letter-spacing:0.1em;color:var(--steel);
+    text-transform:uppercase;
+    margin-bottom:8px;
+  }
+
+  .qcard{
+    background:var(--card);
+    border:1px solid var(--line);
+    padding:28px 26px;
+    margin-bottom:18px;
+  }
+  .qcard .qnum{
+    display:inline-block;
+    font-family:'Oswald',sans-serif;
+    color:var(--red);
+    font-size:0.8rem;
+    letter-spacing:0.1em;
+    margin-bottom:10px;
+  }
+  .qcard h3{
+    font-family:'Inter',sans-serif;
+    text-transform:none;
+    letter-spacing:0;
+    font-size:1.02rem;
+    font-weight:600;
+    margin-bottom:16px;
+    line-height:1.4;
+  }
+  .opt-list{list-style:none;display:flex;flex-direction:column;gap:8px;}
+  .opt-list li{
+    border:1px solid var(--line);
+    padding:0;
+  }
+  .opt-list label{
+    display:flex;align-items:center;gap:12px;
+    padding:12px 14px;
+    cursor:pointer;
+    font-size:0.92rem;
+    transition:background .15s ease, border-color .15s ease;
+  }
+  .opt-list li:hover label{background:var(--paper);}
+  .opt-list input[type="radio"]{accent-color:var(--red);width:16px;height:16px;flex:none;}
+  .opt-list li.correct label{background:#fbeceb;border-color:var(--red);}
+  .opt-list li.wrong label{background:#f3f3f4;border-color:var(--steel);text-decoration:line-through;color:var(--steel);}
+
+  .quiz-submit{
+    display:inline-block;
+    background:var(--red);
+    color:#fff;
+    border:none;
+    font-family:'Oswald',sans-serif;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    font-size:0.85rem;
+    padding:14px 30px;
+    cursor:pointer;
+    transition:background .2s ease;
+    margin-top:10px;
+  }
+  .quiz-submit:hover{background:var(--red-deep);}
+  .quiz-submit:disabled{background:var(--steel);cursor:not-allowed;}
+
+  .result-box{
+    display:none;
+    background:var(--ink);
+    color:#fff;
+    padding:36px 30px;
+    margin-top:30px;
+    text-align:center;
+    border-left:4px solid var(--red-bright);
+  }
+  .result-box.show{display:block;}
+  .result-box .score{
+    font-family:'Oswald',sans-serif;
+    font-size:3rem;
+    font-weight:700;
+    color:var(--red-bright);
+    line-height:1;
+    margin-bottom:8px;
+  }
+  .result-box .score-label{
+    font-size:0.85rem;
+    color:#c9c9cc;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    font-family:'Oswald',sans-serif;
+  }
+  .result-box .score-name{
+    margin-top:16px;
+    font-size:0.9rem;
+    color:#a8a8ac;
+  }
+
+  /* ---------- SUBHERO (sub-page banner) ---------- */
+  .hero.subhero{padding:64px 8vw 54px;}
+  .hero.subhero h1{font-size:clamp(2rem,4.5vw,3rem);margin-bottom:14px;}
+  .hero.subhero p{font-size:1rem;}
+
+  /* ---------- SLIDE VIEWER (Taqdimot) ---------- */
+  .slide-viewer{
+    background:var(--ink);
+    border:1px solid var(--line);
+    max-width:900px;
+    position:relative;
+    overflow:hidden;
+  }
+  .slide-stage{
+    position:relative;
+    aspect-ratio:16/9;
+    overflow:hidden;
+  }
+  .slide{
+    position:absolute;inset:0;
+    padding:8vw 6vw;
+    display:none;
+    flex-direction:column;
+    justify-content:center;
+    color:#fff;
+  }
+  .slide.active{display:flex;}
+  .slide .snum{
+    font-family:'Oswald',sans-serif;
+    color:var(--red-bright);
+    font-size:0.75rem;
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    margin-bottom:14px;
+  }
+  .slide h3{
+    font-family:'Oswald',sans-serif;
+    text-transform:none;
+    letter-spacing:0;
+    font-size:clamp(1.3rem,3vw,2.1rem);
+    font-weight:600;
+    margin-bottom:16px;
+    line-height:1.2;
+  }
+  .slide p, .slide li{
+    font-size:clamp(0.85rem,1.5vw,1.02rem);
+    color:#d4d4d6;
+    max-width:640px;
+  }
+  .slide ul{padding-left:20px;}
+  .slide li{margin-bottom:8px;}
+  .slide .slide-tag{
+    position:absolute;top:24px;right:28px;
+    font-family:'Oswald',sans-serif;
+    font-size:0.72rem;
+    color:#7a7a7e;
+    letter-spacing:0.1em;
+  }
+  .slide-controls{
+    display:flex;align-items:center;justify-content:space-between;
+    background:#1c1c1f;
+    padding:14px 20px;
+    border-top:1px solid #2a2a2e;
+  }
+  .slide-btn{
+    background:transparent;
+    border:1px solid #3a3a3e;
+    color:#fff;
+    font-family:'Oswald',sans-serif;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    font-size:0.78rem;
+    padding:9px 18px;
+    cursor:pointer;
+    transition:border-color .2s ease, background .2s ease;
+  }
+  .slide-btn:hover{border-color:var(--red);}
+  .slide-btn:disabled{opacity:0.3;cursor:not-allowed;}
+  .slide-dots{display:flex;gap:6px;}
+  .slide-dots span{
+    width:7px;height:7px;background:#3a3a3e;
+    display:inline-block;cursor:pointer;
+    transition:background .2s ease;
+  }
+  .slide-dots span.active{background:var(--red-bright);}
+  .slide-count{
+    font-family:'Oswald',sans-serif;
+    font-size:0.78rem;color:#8b8b90;letter-spacing:0.05em;
+  }
+  .download-row{
+    margin-top:26px;
+    display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+  }
+  .download-btn{
+    display:inline-flex;align-items:center;gap:10px;
+    background:var(--red);color:#fff;text-decoration:none;
+    font-family:'Oswald',sans-serif;
+    letter-spacing:0.08em;text-transform:uppercase;
+    font-size:0.82rem;
+    padding:13px 24px;
+    transition:background .2s ease;
+  }
+  .download-btn:hover{background:var(--red-deep);}
+  .download-row .filenote{font-size:0.82rem;color:var(--steel);}
+
+</style>
+</head>
+<body>
+<nav>
+  <div class="navbrand"><span class="dot"></span>Boynazarova Maqsuda</div>
+  <div class="navlinks">
+    <a href="index.html">Bosh sahifa</a>
+    <a href="turlari.html">Sport turlari</a>
+    <a href="afzallik.html">Afzallik / kamchilik</a>
+    <a href="taqdimot.html">Taqdimot</a>
+    <a href="video.html">Video</a>
+    <a href="test.html" class="active">Test</a>
+  </div>
+</nav>
+<header class="hero subhero">
+  <div class="speedlines"><span></span><span></span><span></span><span></span><span></span></div>
+  <div class="hero-inner">
+    <div class="eyebrow">Bilimni sinang</div>
+    <h1>Sport olami — <em>test</em></h1>
+    <p>10 ta savoldan iborat test. Familiya-ismingizni kiritishingiz ixtiyoriy — natija saqlanmaydi, faqat shu sahifada ko‘rsatiladi.</p>
+  </div>
+</header>
+
+<section class="block">
+  <div class="quiz-intro">
+    <label for="playerName">Ism familyangiz (ixtiyoriy)</label>
+    <input type="text" id="playerName" placeholder="Masalan: Boynazarova Maqsuda">
+    <div class="hint">Bu maydon ixtiyoriy — bo‘sh qoldirib ham testni yechishingiz mumkin. Ma’lumot hech qayerda saqlanmaydi.</div>
+  </div>
+
+  <div class="progress-label">Javob berilgan savollar: <span id="answeredCount">0</span> / 10</div>
+  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+
+  <form id="quizForm" style="margin-top:20px;">
+  <div class="qcard" data-qindex="0" data-correct="0">
+    <span class="qnum">Savol 1 / 10</span>
+    <h3>Birinchi Olimpiya o‘yinlari qachon o‘tkazilgan?</h3>
+    <ul class="opt-list">
+        <li data-correct="true">
+          <label><input type="radio" name="q0" value="0"> Miloddan avvalgi 776-yilda</label>
+        </li>
+        <li data-correct="false">
+          <label><input type="radio" name="q0" value="1"> 1896-yilda</label>
+        </li>
+        <li data-correct="false">
+          <label><input type="radio" name="q0" value="2"> 1900-yilda</label>
+        </li>
+        <li data-correct="false">
+          <label><input type="radio" name="q0" value="3"> Milodning 500-yilida</label>
+        </li>
+    </ul>
+  </div>
+  <div class="qcard" data-qindex="1" data-correct="1">
+    <span class="qnum">Savol 2 / 10</span>
+    <h3>Zamonaviy Olimpiada harakatini qayta tiklashga kim tashabbus ko‘rsatgan?</h3>
+    <ul class="opt-list">
+        <li data-correct="false">
+          <label><input type="radio" name="q1" value="0"> Alan Tyuring</label>
+        </li>
+        <li data-correct="true">
+          <label><input type="radio" name="q1" value="1"> Pyer de Kuberten</label>
+        </li>
+        <li data-correct="false">
+          <label><input type="radio" name="q1" value="2"> Jon Makkarti</label>
+        </li>
+        <li data-correct="false">
+          <label><input type="radio" name="q1" value="3"> Isaak Nyuton</label>
+        </li>
+    </ul>
+  </div>
+  <div class="qcard" data-qindex="2" data-correct="2">
+    <span class="qnum">Savol 3 / 10</span>
+    <h3>Zamonaviy Olimpiada 1896-yilda qaysi shaharda qayta tiklandi?</h3>
+    <ul class="opt-list">
+        <li data-correct="false">
+          <label><input type="radio" name="q2" value="0"> Parij</label>
+        </li>
+        <li data-correct="false">
+          <label><input type="radio" name="q2" value="1"> Rim</label>
+        </li>
+        <li data-correct="true">
+          <label><input type="radio" name="q2" value="2"> Afina</label>
+        </li>
+        <li data-correct="false">
+          <label><input type="radio" name="q2" value="3"> London</label>
+        </li>
+    </ul>
+  </div>
+  <div class="qcard" data-qindex="3" data-correct="3">
+    <span class="qnum">Savol 4 / 10</span>
+    <h3>O‘zbekistonning milliy sport turi qaysi?</h3>
+    <ul class="opt-list">
+        <li data-correct="false">
+          <label><input type="radio" name="q3" value="0"> Boks</label>
+        </li>
+        <li data-correct="false">
+          <label><input type="radio" name="q3" value="1"> Regbi</label>
+        </li>
+        <li data-correct="false">
+          <label><input type="radio" name="q3" value="2"> Golf</label>
+        </li>
+        <li data-correct="true">
+          <label><input type="radio" name="q3" value="3"> Kurash</label>
+        </li>
+    </ul>
+  </div>
+  <div class="qcard" data-qindex="4" data-correct="0">
+    <span class="qnum">Savol 5 / 10</span>
+    <h3>Reaksiya tezligi va strategik fikrlashni rivojlantiruvchi, ekran orqali o‘ynaladigan zamonaviy musobaqa turi qanday ataladi?</h3>
+    <ul class="opt-list">
+        <li data-correct="true">
+          <label><input type="radio" name="q4" value="0"> Kibersport</label>
+        </li>
+        <li data-correct="false">
+          <label><input type="radio" name="q4" value="1"> Yengil atletika</label>
+        </li>
+        <li data-correct="false">
+          <label><input type="radio" name="q4" value="2"> Gimnastika</label>
+        </li>
+        <li data-correct="false">
+          <label><input type="radio" name="q4" value="3"> Suzish</label>
+        </li>
+    </ul>
+  </div>
+  <div class="qcard" data-qindex="5" data-correct="2">
+    <span class="qnum">Savol 6 / 10</span>
+    <h3>Quyidagilardan qaysi biri sportning ijobiy ta’siriga kiradi?</h3>
+    <ul class="opt-list">
+        <li data-correct="false">
+          <label><input type="radio" name="q5" value="0"> Moliyaviy xarajat</label>
+        </li>
+        <li data-correct="false">
+          <label><input type="radio" name="q5" value="1"> Jarohat xavfi</label>
+        </li>
+        <li data-correct="true">
+          <label><input type="radio" name="q5" value="2"> Stressni kamaytirish</label>
+        </li>
+        <li data-correct="false">
+          <label><input type="radio" name="q5" value="3"> Dopping muammosi</label>
+        </li>
+    </ul>
+  </div>
+  <div class="qcard" data-qindex="6" data-correct="1">
+    <span class="qnum">Savol 7 / 10</span>
+    <h3>Sportda «dopping» tushunchasi nimani bildiradi?</h3>
+    <ul class="opt-list">
+        <li data-correct="false">
+          <label><input type="radio" name="q6" value="0"> Sport kiyimi turini</label>
+        </li>
+        <li data-correct="true">
+          <label><input type="radio" name="q6" value="1"> Noqonuniy vositalardan foydalanishni</label>
+        </li>
+        <li data-correct="false">
+          <label><input type="radio" name="q6" value="2"> Musobaqa vaqtini</label>
+        </li>
+        <li data-correct="false">
+          <label><input type="radio" name="q6" value="3"> Stadion nomini</label>
+        </li>
+    </ul>
+  </div>
+  <div class="qcard" data-qindex="7" data-correct="2">
+    <span class="qnum">Savol 8 / 10</span>
+    <h3>Suzish sporti asosan nimani rivojlantiradi?</h3>
+    <ul class="opt-list">
+        <li data-correct="false">
+          <label><input type="radio" name="q7" value="0"> Faqat qo‘l kuchini</label>
+        </li>
+        <li data-correct="false">
+          <label><input type="radio" name="q7" value="1"> Faqat ko‘rish qobiliyatini</label>
+        </li>
+        <li data-correct="true">
+          <label><input type="radio" name="q7" value="2"> Nafas olish tizimini va butun tana mushaklarini</label>
+        </li>
+        <li data-correct="false">
+          <label><input type="radio" name="q7" value="3"> Faqat xotirani</label>
+        </li>
+    </ul>
+  </div>
+  <div class="qcard" data-qindex="8" data-correct="2">
+    <span class="qnum">Savol 9 / 10</span>
+    <h3>Kelajakda sportda qaysi texnologiya yanada ko‘proq qo‘llanilishi kutilmoqda?</h3>
+    <ul class="opt-list">
+        <li data-correct="false">
+          <label><input type="radio" name="q8" value="0"> Radiogazeta</label>
+        </li>
+        <li data-correct="false">
+          <label><input type="radio" name="q8" value="1"> Telegraf</label>
+        </li>
+        <li data-correct="true">
+          <label><input type="radio" name="q8" value="2"> Virtual va qo‘shilgan reallik (VR/AR)</label>
+        </li>
+        <li data-correct="false">
+          <label><input type="radio" name="q8" value="3"> Qog‘oz jurnal</label>
+        </li>
+    </ul>
+  </div>
+  <div class="qcard" data-qindex="9" data-correct="1">
+    <span class="qnum">Savol 10 / 10</span>
+    <h3>Futbol yoki voleybol kabi jamoaviy sport turlari insonda ayniqsa qaysi ko‘nikmani shakllantiradi?</h3>
+    <ul class="opt-list">
+        <li data-correct="false">
+          <label><input type="radio" name="q9" value="0"> Yolg‘iz mashq qilish odatini</label>
+        </li>
+        <li data-correct="true">
+          <label><input type="radio" name="q9" value="1"> Jamoada ishlash va hamkorlikni</label>
+        </li>
+        <li data-correct="false">
+          <label><input type="radio" name="q9" value="2"> Faqat kuch mashqlarini</label>
+        </li>
+        <li data-correct="false">
+          <label><input type="radio" name="q9" value="3"> Individual reaksiyani</label>
+        </li>
+    </ul>
+  </div>
+
+    <button type="submit" class="quiz-submit" id="submitBtn">Natijani ko‘rish</button>
+  </form>
+
+  <div class="result-box" id="resultBox">
+    <div class="score" id="scoreValue">0 / 10</div>
+    <div class="score-label" id="scoreLabel">Natijangiz</div>
+    <div class="score-name" id="scoreName"></div>
+  </div>
+</section>
+
+<script>
+(function(){
+  const form = document.getElementById('quizForm');
+  const cards = Array.from(form.querySelectorAll('.qcard'));
+  const answered = document.getElementById('answeredCount');
+  const fill = document.getElementById('progressFill');
+  const total = 10;
+
+  function updateProgress(){
+    let count = 0;
+    cards.forEach(c => {
+      if (c.querySelector('input[type="radio"]:checked')) count++;
+    });
+    answered.textContent = count;
+    fill.style.width = (count/total*100) + '%';
+  }
+
+  form.addEventListener('change', updateProgress);
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    let score = 0;
+    cards.forEach(card => {
+      const correctIdx = card.getAttribute('data-correct');
+      const checked = card.querySelector('input[type="radio"]:checked');
+      const items = card.querySelectorAll('.opt-list li');
+      items.forEach((li, idx) => {
+        li.querySelectorAll('input').forEach(inp => inp.disabled = true);
+        if (String(idx) === correctIdx) li.classList.add('correct');
+        else if (checked && String(idx) === checked.value) li.classList.add('wrong');
+      });
+      if (checked && checked.value === correctIdx) score++;
+    });
+    document.getElementById('submitBtn').disabled = true;
+    document.getElementById('scoreValue').textContent = score + ' / ' + total;
+    const nameVal = document.getElementById('playerName').value.trim();
+    document.getElementById('scoreName').textContent = nameVal ? nameVal + ', natijangiz saqlab qo‘yildi (faqat shu sahifada).' : 'Natijangiz faqat shu sahifada ko‘rsatildi.';
+    const box = document.getElementById('resultBox');
+    box.classList.add('show');
+    box.scrollIntoView({behavior:'smooth', block:'center'});
+  });
+})();
+</script>
+
+<footer>
+  <div class="navbrand"><span class="dot"></span>Boynazarova Maqsuda</div>
+  Sport olami — mavzu taqdimoti sahifasi
+</footer>
+
+</body>
+</html>
